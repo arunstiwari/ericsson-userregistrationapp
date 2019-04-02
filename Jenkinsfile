@@ -9,7 +9,6 @@ pipeline {
                 label 'mac'
             }
             steps {
-                cd DevOps-Pipeline/user-registration-application 
                 sh 'mvn test'
             }
             post {
@@ -23,7 +22,6 @@ pipeline {
                 label 'mac'
             }
             steps {
-                cd DevOps-Pipeline/user-registration-application 
                 sh 'mvn org.pitest:pitest-maven:mutationCoverage'
             }
         }
@@ -32,7 +30,6 @@ pipeline {
                 label 'mac'
             }
             steps {
-                cd DevOps-Pipeline/user-registration-application 
                 sh 'mvn checkstyle:checkstyle'
             }
         }
@@ -41,7 +38,6 @@ pipeline {
                 label 'mac'
             }
             steps {
-                cd DevOps-Pipeline/user-registration-application 
                 sh 'mvn jacoco:report'
             }
             post {
