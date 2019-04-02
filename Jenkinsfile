@@ -1,3 +1,4 @@
+def MAVEN_HOME=/usr/local/bin/mvn
 pipeline {
     agent { 
                 label 'mac'
@@ -9,7 +10,7 @@ pipeline {
                 label 'mac'
             }
             steps {
-                sh 'mvn test'
+                sh '${MAVEN_HOME} test'
             }
             post {
                 always {
