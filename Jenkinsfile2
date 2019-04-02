@@ -35,13 +35,12 @@ pipeline {
                 label 'mac'
             }
             steps {
-            	step(
+            	
             	  git ([url: 'https://github.com/arunstiwari/ericsson-acceptance-testing.git', branch: 'master'])
             	 
-            	)
-            	step(
+            	
             	 sh '/usr/local/bin/mvn test'
-            	)
+            	
             }
         }
         stage('Checkout Security Test') {
