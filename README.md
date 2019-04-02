@@ -1,7 +1,6 @@
 The Application
 ==========
 
-[German / Deutsch](LIESMICH.md)
 
 The application itself just contains functionality to register users. Users are stored in an In-Memory-Database.
 
@@ -13,3 +12,6 @@ The application uses Spring Boot. For the web interface Thymeleafe templates are
 
 
 mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=b40ba81da41465f49639ad2436319cc00e8ee079
+
+2. docker build -t user-registration-application:1.0 .
+3. docker run -p 9080:9080 user-registration-appliction:1.0

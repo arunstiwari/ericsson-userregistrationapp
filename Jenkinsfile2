@@ -1,75 +1,58 @@
+def MAVEN_HOME
 pipeline {
-    agent none
+    agent { 
+                label 'mac'
+            }
     stages {
-        stage('Build') {
-            agent any
-            steps {
-                checkout scm
-                sh 'make'
-                stash includes: '**/target/*.jar', name: 'app' 
-            }
-        }
-        stage('Unit Test') {
+        
+        stage('Build the Package') {
             agent { 
                 label 'mac'
             }
             steps {
-                cd DevOps-Pipeline/user-registration-application 
-                sh 'mvn test'
+                sh '/usr/local/bin/mvn -DskipTests=true package'
+            }
+            
+        }
+        stage('Build the Docker Image') {
+            agent { 
+                label 'mac'
+            }
+            steps {
+                sh 'docker build -t user-registration-application:1.0 .'
+            }
+        }
+        stage('Launch the Docker Container') {
+            agent { 
+                label 'mac'
+            }
+            steps {
+                sh 'docker run -d --name userregistrationapp -p 9080:9080 user-registration-application:1.0'
+            }
+        }
+        stage('Checkout Acceptance Test') {
+            agent { 
+                label 'mac'
+            }
+            steps {
+                git 'https://github.com/arunstiwari/ericsson-acceptance-testing.git'
             }
             post {
                 always {
-                    junit '**/target/*.xml'
+                    sh '/usr/local/bin/mvn test'
                 }
             }
         }
-        stage('Mutation Test') {
+        stage('Checkout Security Test') {
             agent { 
                 label 'mac'
             }
             steps {
-                cd DevOps-Pipeline/user-registration-application 
-                sh 'mvn org.pitest:pitest-maven:mutationCoverage'
-            }
-        }
-        stage('Checkstyle Analysis') {
-            agent { 
-                label 'mac'
-            }
-            steps {
-                cd DevOps-Pipeline/user-registration-application 
-                sh 'mvn checkstyle:checkstyle'
-            }
-        }
-        stage('Code Coverage Analysis') {
-            agent { 
-                label 'mac'
-            }
-            steps {
-                cd DevOps-Pipeline/user-registration-application 
-                sh 'mvn jacoco:report'
-            }post {
-                always {
-                    jacoco( 
-      					execPattern: 'target/*.exec',
-      					classPattern: 'target/classes',
-      					sourcePattern: 'src/main/java',
-      					exclusionPattern: 'src/test*'
-					)
-                }
-            }
-        }
-        stage('Test on Windows') {
-            agent {
-                label 'windows'
-            }
-            steps {
-                unstash 'app'
-                bat 'make check' 
+                git 'https://github.com/arunstiwari/ericsson-acceptance-testing.git'
             }
             post {
                 always {
-                    junit '**/target/*.xml'
+                    sh '/usr/local/bin/mvn br.com.softplan.security.zap:zap-maven-plugin:analyze'
                 }
             }
         }
