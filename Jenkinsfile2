@@ -50,7 +50,9 @@ pipeline {
                 label 'mac'
             }
             steps {
-                sh '/usr/local/bin/git https://github.com/arunstiwari/ericsson-acceptance-testing.git'
+                step(
+            	  git ([url: 'https://github.com/arunstiwari/ericsson-acceptance-testing.git', branch: 'master'])
+            	)
             }
             post {
                 always {
