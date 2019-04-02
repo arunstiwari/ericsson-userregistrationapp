@@ -21,11 +21,7 @@ pipeline {
             steps {
                 sh '${MAVEN_HOME} test'
             }
-            post {
-                always {
-                    junit '**/target/surefire-reports/*.xml'
-                }
-            }
+            
         }
         stage('Mutation Test') {
             agent { 
