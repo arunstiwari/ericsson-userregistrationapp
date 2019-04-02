@@ -37,7 +37,10 @@ pipeline {
             steps {
             	step(
             	  git ([url: 'https://github.com/arunstiwari/ericsson-acceptance-testing.git', branch: 'master'])
-            	  sh '/usr/local/bin/mvn test'
+            	 
+            	)
+            	step(
+            	 sh '/usr/local/bin/mvn test'
             	)
             }
         }
