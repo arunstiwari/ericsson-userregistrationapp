@@ -36,7 +36,7 @@ pipeline {
             }
             steps {
             	step(
-            	  git url: 'https://github.com/arunstiwari/ericsson-acceptance-testing.git', branch: 'master'
+            	  git ([url: 'https://github.com/arunstiwari/ericsson-acceptance-testing.git', branch: 'master'])
             	)
             }
             post {
