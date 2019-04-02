@@ -19,7 +19,7 @@ pipeline {
                 label 'mac'
             }
             steps {
-                sh 'docker build -t user-registration-application:1.0 .'
+                sh '/usr/local/bin/docker build -t user-registration-application:1.0 .'
             }
         }
         stage('Launch the Docker Container') {
@@ -27,7 +27,7 @@ pipeline {
                 label 'mac'
             }
             steps {
-                sh 'docker run -d --name userregistrationapp -p 9080:9080 user-registration-application:1.0'
+                sh '/usr/local/bin/docker run -d --name userregistrationapp -p 9080:9080 user-registration-application:1.0'
             }
         }
         stage('Checkout Acceptance Test') {
@@ -35,7 +35,7 @@ pipeline {
                 label 'mac'
             }
             steps {
-                git 'https://github.com/arunstiwari/ericsson-acceptance-testing.git'
+                /usr/local/bin/git 'https://github.com/arunstiwari/ericsson-acceptance-testing.git'
             }
             post {
                 always {
@@ -48,7 +48,7 @@ pipeline {
                 label 'mac'
             }
             steps {
-                git 'https://github.com/arunstiwari/ericsson-acceptance-testing.git'
+                /usr/local/bin/git 'https://github.com/arunstiwari/ericsson-acceptance-testing.git'
             }
             post {
                 always {
