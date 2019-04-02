@@ -37,12 +37,8 @@ pipeline {
             steps {
             	step(
             	  git ([url: 'https://github.com/arunstiwari/ericsson-acceptance-testing.git', branch: 'master'])
+            	  sh '/usr/local/bin/mvn test'
             	)
-            }
-            post {
-                always {
-                    sh '/usr/local/bin/mvn test'
-                }
             }
         }
         stage('Checkout Security Test') {
@@ -52,11 +48,13 @@ pipeline {
             steps {
                 step(
             	  git ([url: 'https://github.com/arunstiwari/ericsson-acceptance-testing.git', branch: 'master'])
+            	  sh '/usr/local/bin/mvn br.com.softplan.security.zap:zap-maven-plugin:analyze'
             	)
             }
             post {
                 always {
-                    sh '/usr/local/bin/mvn br.com.softplan.security.zap:zap-maven-plugin:analyze'
+                    sh '/usr/local/bin/docker stop userregistrationapp'
+                    sh '/usr/local/bin/docker rm userregistrationapp'
                 }
             }
         }
