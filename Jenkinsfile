@@ -1,9 +1,18 @@
-def MAVEN_HOME=/usr/local/bin/mvn
+def MAVEN_HOME
 pipeline {
     agent { 
                 label 'mac'
             }
     stages {
+    
+    	stage('Initialize the variables') {
+            // Each stage is made up of steps
+            steps{
+                script{
+                    MAVEN_HOME="/usr/local/bin/mvn"
+                }
+            }                
+        }
         
         stage('Unit Test') {
             agent { 
