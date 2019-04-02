@@ -38,7 +38,7 @@ pipeline {
             	
             	  git ([url: 'https://github.com/arunstiwari/ericsson-acceptance-testing.git', branch: 'master'])
             	 
-            	
+            	sh '/bin/sleep 120'
             	 sh '/usr/local/bin/mvn test'
             	
             }
