@@ -19,7 +19,7 @@ pipeline {
                 label 'mac'
             }
             steps {
-                sh '${MAVEN_HOME} test'
+                sh `'${MAVEN_HOME} test'`
             }
             
         }
