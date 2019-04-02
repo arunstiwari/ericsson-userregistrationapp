@@ -19,7 +19,7 @@ pipeline {
                 label 'mac'
             }
             steps {
-                sh `'${MAVEN_HOME} test'`
+                sh '/usr/local/bin/mvn test'
             }
             
         }
@@ -28,7 +28,7 @@ pipeline {
                 label 'mac'
             }
             steps {
-                sh 'mvn org.pitest:pitest-maven:mutationCoverage'
+                sh '/usr/local/bin/mvn org.pitest:pitest-maven:mutationCoverage'
             }
         }
         stage('Checkstyle Analysis') {
@@ -36,7 +36,7 @@ pipeline {
                 label 'mac'
             }
             steps {
-                sh 'mvn checkstyle:checkstyle'
+                sh '/usr/local/bin/mvn checkstyle:checkstyle'
             }
         }
         stage('Code Coverage Analysis') {
@@ -44,7 +44,7 @@ pipeline {
                 label 'mac'
             }
             steps {
-                sh 'mvn jacoco:report'
+                sh '/usr/local/bin/mvn jacoco:report'
             }
             post {
                 always {
