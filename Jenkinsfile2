@@ -35,7 +35,7 @@ pipeline {
                 label 'mac'
             }
             steps {
-                sh /usr/local/bin/git 'https://github.com/arunstiwari/ericsson-acceptance-testing.git'
+                sh '/usr/local/bin/git https://github.com/arunstiwari/ericsson-acceptance-testing.git'
             }
             post {
                 always {
@@ -48,7 +48,7 @@ pipeline {
                 label 'mac'
             }
             steps {
-                sh /usr/local/bin/git 'https://github.com/arunstiwari/ericsson-acceptance-testing.git'
+                sh '/usr/local/bin/git https://github.com/arunstiwari/ericsson-acceptance-testing.git'
             }
             post {
                 always {
