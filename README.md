@@ -16,3 +16,27 @@ mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.login=b40ba81da41
 
 2. docker build -t user-registration-application:1.0 .
 3. docker run -p 9080:9080 user-registration-application:1.0
+
+
+4. Jenkinsfile for running gatling
+
+pipeline {
+    agent any
+    stages {
+        stage("Maven build") {
+            steps {
+                sh 'mvn -B clean package'
+            }
+        }
+        stage("Gatling run") {
+            steps {
+                sh 'mvn gatling:test'
+            }
+            post {
+                always {
+                    gatlingArchive()
+                }
+            }
+        }
+    }
+}
