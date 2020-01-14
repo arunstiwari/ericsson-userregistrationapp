@@ -1,0 +1,18 @@
+sonar.tests.exclusions=**/test/**.sh
+sonar.sources=./source
+sonar.sources.exclusions=**/source/**.sh
+sonar.sources=./source
+sonar.coverageReportPaths=./coverage.xml
+sonar.tests=./test
+sonar.tests.exclusions=**/test/**.sh
+sonar.testExecutionReportPaths=./test_results.xml
+sonar.links.issue=https://github.com/utPLSQL/utPLSQL-demo-project/issues
+#sonar.links.ci=https://travis-ci.org/utPLSQL/utPLSQL-demo-project
+sonar.links.homepage=https://github.com/utPLSQL/utPLSQL-demo-project
+sonar.projectDescription=Demo of a project using utPLSQL and Sonar integrations
+sonar.plsql.file.suffixes=sql,tab,tps,pks,pkb,tpb,prc,fnc
+sonar.language=plsql
+#sonar.host.url=http://localhost:9000
+# Encoding of the source code. Default is default system encoding
+#sonar.sourceEncoding=UTF-8
+sonar.exclusions=**/test/**.sh,**/source/**.sh
